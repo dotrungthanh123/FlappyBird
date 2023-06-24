@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     int score;
     public Button StartButton;
     public Image OverImage;
+    public Image ReadyImage;
     Bird Bird;
     Spawn Spawner;
     public float bound, bound_y;
@@ -26,12 +27,20 @@ public class GameManager : MonoBehaviour
         bound_y = Camera.main.ScreenToWorldPoint(Vector3.zero).y;
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space) && !Spawner.enabled)
+            StartGame();
+    }
+
     private void Start() {
-        StartGame();
+        Spawner.enabled = false;
+        Bird.GetComponent<Rigidbody2D>().isKinematic = true;
+        OverImage.gameObject.SetActive(false);
     }
 
     public void StartGame() {
         StartButton.gameObject.SetActive(false);
+        ReadyImage.gameObject.SetActive(false);
         OverImage.gameObject.SetActive(false);
         Bird.GetComponent<Rigidbody2D>().isKinematic = false;
         Bird.frame = 1;

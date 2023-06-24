@@ -6,10 +6,6 @@ public class Obstacle : MonoBehaviour
 {
     public static float Speed;
 
-    private void Start() {
-        Speed = 1.5f;
-    }
-
     private void Update() {
         if (transform.position.x < GameManager.Instance.bound - 0.6) {
             Destroy(gameObject);
